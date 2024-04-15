@@ -1,4 +1,7 @@
-# Listen_Music
+# Listen Music
+
+## Nota
+As músicas incluídas neste projeto são apenas para fins de estudo.
 
 ## Descrição do Projeto
 Este é um projeto de um site chamado "Escuta aí!", que consiste em uma plataforma para ouvir músicas de diferentes artistas ou gêneros. O site possui três playlists distintas e um player de música interativo, construído com HTML, CSS, Bootstrap e JavaScript. Além disso, o site conta com uma navegação por meio de uma barra de navegação que permite acessar o player de música, informações sobre a empresa e solicitar uma música.
@@ -29,6 +32,3 @@ Um modal com um formulário para os usuários solicitarem músicas, fornecendo n
 3. Navegue pelo site utilizando a barra de navegação.
 4. Experimente o player de música e suas funcionalidades.
 5. Explore as diferentes páginas e interações oferecidas pelo site.
-
-## Nota
-As músicas incluídas neste projeto são apenas para fins de estudo.
