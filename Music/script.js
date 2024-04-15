@@ -2,6 +2,7 @@ const audioPlayer = document.getElementById('audioPlayer');
 const playPauseButton = document.getElementById('playPauseButton');
 const prevButton = document.getElementById('prevButton');
 const nextButton = document.getElementById('nextButton');
+const randomButton = document.getElementById('randomButton');
 const playlists = document.querySelectorAll('#playlist');
 const coverImage = document.getElementById('coverImage');
 let currentSongIndex = 0;
@@ -23,8 +24,7 @@ function playPause() {
         </svg>
       `;
     }
-  }
-  
+}
 
 function playNext() {
   currentSongIndex = (currentSongIndex + 1) % playlists[currentPlaylistIndex].querySelectorAll('.song-item').length;
@@ -36,19 +36,45 @@ function playPrev() {
   loadSong();
 }
 
+function playRandom() {
+  const allSongs = [];
+  playlists.forEach((playlist) => {
+    const songs = playlist.querySelectorAll('.song-item');
+    allSongs.push(...songs);
+  });
+
+  const numSongs = allSongs.length;
+  const randomIndex = Math.floor(Math.random() * numSongs);
+  const randomSong = allSongs[randomIndex];
+  const playlistIndex = Array.from(playlists).findIndex((playlist) =>
+    playlist.contains(randomSong)
+  );
+  currentPlaylistIndex = playlistIndex;
+  currentSongIndex = Array.from(randomSong.parentNode.children).indexOf(randomSong);
+  loadSong();
+}
+
 function loadSong() {
   const playlist = playlists[currentPlaylistIndex];
   const songItem = playlist.querySelectorAll('.song-item')[currentSongIndex];
   const songSrc = songItem.dataset.src;
   const coverSrc = songItem.querySelector('img').getAttribute('src');
+  const songTitle = songItem.textContent.trim(); // Obtém o título da música
   audioPlayer.src = songSrc;
   coverImage.src = coverSrc;
+  document.getElementById('songTitle').textContent = songTitle; // Atualiza o título da música
   audioPlayer.play();
 }
+
 
 playPauseButton.addEventListener('click', playPause);
 nextButton.addEventListener('click', playNext);
 prevButton.addEventListener('click', playPrev);
+randomButton.addEventListener('click', playRandom);
+
+audioPlayer.addEventListener('ended', () => {
+  playNext();
+});
 
 playlists.forEach((playlist, index) => {
   playlist.addEventListener('click', (event) => {
